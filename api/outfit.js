@@ -3,8 +3,6 @@ const { callClaudeForOutfits } = require('../lib/claudeClient');
 const { fetchClothingImage } = require('../lib/unsplash');
 const profile = require('../lib/profile');
 
-// Simple daily cost-control limit. Resets on cold start, like the login
-// rate limiter — a known, accepted limitation for a single-user app.
 const MAX_REQUESTS_PER_DAY = 60;
 const DAY_MS = 24 * 60 * 60 * 1000;
 const usage = { count: 0, windowStart: Date.now() };
@@ -23,6 +21,7 @@ HER PROFILE:
 - Budget note: ${profile.budgetNote}
 
 RULES:
+- Only mention location or "coastal"/weather-driven framing when the occasion genuinely calls for it (e.g. "beach," "outdoor," "travel"). Do not default to coastal/Santa Cruz language for occasions like work, formal events, or dinner where it isn't relevant — vary your framing based on the occasion itself, not her location.
 - Only suggest items from her existing wardrobe conceptually (general clothing categories, not specific purchase links — this app is wardrobe-only for now, no shopping suggestions).
 - Never recommend heavy foundation by default. Never imply makeup is necessary to look presentable.
 - Do not force all three owned makeup products into every outfit — use what's genuinely relevant.
@@ -110,8 +109,6 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  // Attach a real image to each outfit, in parallel. Never blocks the whole
-  // response if one image lookup fails.
   const outfitsWithImages = await Promise.all(
     outfitData.outfits.map(async (outfit) => {
       const image = await fetchClothingImage(outfit.imageSearchQuery).catch(() => null);
