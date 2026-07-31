@@ -39,7 +39,7 @@ RULES:
       "colors": ["array of 3-5 color names that define this outfit's palette"],
       "whyItWorks": "string, why this suits the occasion",
       "comfortNotes": "string, practical notes on comfort/weather/walking suitability",
-      "imageSearchQuery": "string, a short 3-5 word search phrase for a clothing photo representing this outfit (e.g. 'linen wrap dress sage green')",
+      "imageSearchQuery": "string, a short 3-5 word search phrase for a women's clothing photo representing this outfit's key piece (e.g. 'terracotta midi dress' or 'high waisted denim jeans') — do not include gender-neutral or menswear terms",
       "makeup": {
         "look": "string, overall makeup look description",
         "blush": "string, blush shade/placement suggestion",
