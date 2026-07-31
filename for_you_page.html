@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Her Personal Stylist</title>
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/foryou.css" />
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="/dashboard.html" class="brand" style="text-decoration: none; color: inherit;">Her Personal Stylist</a>
+  <div class="nav-links">
+    <a href="/outfits.html" class="nav-link">Outfits</a>
+    <a href="/makeup-skincare.html" class="nav-link">Makeup &amp; Skincare</a>
+    <button class="logout-link" id="logoutBtn">Log out</button>
+  </div>
+</nav>
+
+<div class="foryou-wrap">
+  <p class="foryou-kicker">made for you</p>
+  <h1 class="foryou-title">Not the point of this app.</h1>
+
+  <div class="letter">
+    <p>Jaan,</p>
+
+    <p>
+      If you're reading this, it means you actually clicked through to a page in your own
+      styling app that has nothing to do with outfits. Good. That was the plan.
+    </p>
+
+    <p>
+      Everything else here — the wardrobe, the outfit ideas, the way it knows your blush
+      before you ask — I built because I wanted something genuinely useful to
+      you every day. This page exists for a much simpler reason: I wanted one corner of
+      it that wasn't useful at all. Just yours.
+    </p>
+
+    <p>
+      This is not just an app; it's a sign from my side for a long-term commitment with my 
+      partner. i wanted to make something and give u something truly different. that u 
+      may not expect and still like(i hope u do jaan)
+    </p>
+
+    <p>
+      What I do know, writing this: you make ordinary weeks feel worth paying attention
+      to. I notice it most in the small stuff — not the big declarations, just the fact
+      that I'd rather be doing nothing with you than something without you.
+    </p>
+
+    <p>
+      So — happy girlfriend's day, honey. This whole thing is yours. All of it
+      (including me).
+    </p>
+
+    <p class="signoff">I love you.<br />— K</p>
+  </div>
+
+  <div class="foryou-note">
+    <p>
+      A note to future-me: Thanks for coming into my life and making my life feel like a movie 
+      with happy, sad, and all kinds of mixed emotions. u made my life simple cause now 
+      there is one thing I can be certain about always: US. 
+    </p>
+  </div>
+</div>
+
+<script src="/js/guard.js"></script>
+<script>
+  document.getElementById('logoutBtn').addEventListener('click', async () => {
+    await fetch('/api/logout', { method: 'POST' });
+    window.location.href = '/index.html';
+  });
+</script>
+
+</body>
+</html>

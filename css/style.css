@@ -164,6 +164,30 @@ h1, h2, h3, .display {
   background: #FFFFFF;
 }
 
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.nav-link {
+  font-size: 13px;
+  color: var(--charcoal-soft);
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: var(--charcoal);
+}
+
+.nav-link-rose {
+  color: var(--rose);
+}
+
+.nav-link-rose:hover {
+  color: var(--rose-deep, var(--rose));
+}
+
 .top-nav .brand {
   font-family: 'Cormorant Garamond', serif;
   font-size: 22px;
