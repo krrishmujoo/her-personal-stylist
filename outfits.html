@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Her Personal Stylist</title>
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/outfits.css" />
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="/dashboard.html" class="brand" style="text-decoration: none; color: inherit;">Her Personal Stylist</a>
+  <button class="logout-link" id="logoutBtn">Log out</button>
+</nav>
+
+<div class="outfits-wrap">
+  <div class="search-row">
+    <input
+      type="text"
+      id="occasionInput"
+      class="occasion-input"
+      placeholder="What are you getting ready for?"
+    />
+    <button id="searchBtn" class="btn-primary search-btn">Find looks</button>
+  </div>
+
+  <div id="statusArea" class="status-area"></div>
+
+  <div id="resultsGrid" class="results-grid"></div>
+</div>
+
+<script src="/js/guard.js"></script>
+<script>
+  document.getElementById('logoutBtn').addEventListener('click', async () => {
+    await fetch('/api/logout', { method: 'POST' });
+    window.location.href = '/index.html';
+  });
+
+  const input = document.getElementById('occasionInput');
+  const searchBtn = document.getElementById('searchBtn');
+  const statusArea = document.getElementById('statusArea');
+  const resultsGrid = document.getElementById('resultsGrid');
+
+  function skeletonCard() {
+    return `
+      <div class="outfit-card skeleton-card">
+        <div class="skeleton-image"></div>
+        <div class="skeleton-line" style="width: 60%;"></div>
+        <div class="skeleton-line" style="width: 90%;"></div>
+        <div class="skeleton-line" style="width: 80%;"></div>
+      </div>`;
+  }
+
+  function renderColorSwatches(colors) {
+    return colors
+      .map((c) => `<span class="color-chip" title="${escapeHtml(c)}">${escapeHtml(c)}</span>`)
+      .join('');
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function renderOutfitCard(outfit) {
+    const imageHtml = outfit.image
+      ? `<img class="outfit-image" src="${outfit.image.imageUrl}" alt="${escapeHtml(outfit.title)}" loading="lazy" />
+         <a class="photo-credit" href="${outfit.image.unsplashLink}" target="_blank" rel="noopener">
+           Photo: ${escapeHtml(outfit.image.photographerName)} on Unsplash
+         </a>`
+      : `<div class="outfit-image outfit-image-placeholder">${escapeHtml(outfit.title)}</div>`;
+
+    return `
+      <div class="outfit-card">
+        ${imageHtml}
+        <div class="outfit-card-body">
+          <h3 class="outfit-title">${escapeHtml(outfit.title)}</h3>
+          <p class="outfit-desc">${escapeHtml(outfit.description)}</p>
+
+          <div class="color-row">${renderColorSwatches(outfit.colors)}</div>
+
+          <ul class="pieces-list">
+            ${outfit.pieces.map((p) => `<li>${escapeHtml(p)}</li>`).join('')}
+          </ul>
+
+          <p class="why-it-works"><strong>Why it works:</strong> ${escapeHtml(outfit.whyItWorks)}</p>
+          <p class="comfort-notes"><strong>Comfort:</strong> ${escapeHtml(outfit.comfortNotes)}</p>
+
+          <div class="companion-section">
+            <h4>Makeup</h4>
+            <p>${escapeHtml(outfit.makeup.look)}</p>
+            <ul class="companion-list">
+              <li><strong>Blush:</strong> ${escapeHtml(outfit.makeup.blush)}</li>
+              <li><strong>Lip:</strong> ${escapeHtml(outfit.makeup.lip)}</li>
+              <li><strong>Eyes:</strong> ${escapeHtml(outfit.makeup.eyes)}</li>
+            </ul>
+            <p class="using-owned">${escapeHtml(outfit.makeup.usingWhatSheOwns)}</p>
+          </div>
+
+          <div class="companion-section">
+            <h4>Skincare prep</h4>
+            <p>${escapeHtml(outfit.skincare.prep)}</p>
+            <p class="skincare-notes">${escapeHtml(outfit.skincare.notes)}</p>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  async function runSearch(occasion) {
+    if (!occasion || !occasion.trim()) return;
+
+    searchBtn.disabled = true;
+    searchBtn.textContent = 'Finding looks\u2026';
+    statusArea.innerHTML = '';
+    resultsGrid.innerHTML = skeletonCard() + skeletonCard() + skeletonCard();
+
+    try {
+      const res = await fetch('/api/outfit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ occasion }),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        resultsGrid.innerHTML = '';
+        statusArea.innerHTML = `<p class="error-message">${escapeHtml(data.error || 'Something went wrong. Please try again.')}</p>`;
+        return;
+      }
+
+      resultsGrid.innerHTML = data.outfits.map(renderOutfitCard).join('');
+    } catch (err) {
+      resultsGrid.innerHTML = '';
+      statusArea.innerHTML = '<p class="error-message">Could not reach the server. Check your connection and try again.</p>';
+    } finally {
+      searchBtn.disabled = false;
+      searchBtn.textContent = 'Find looks';
+    }
+  }
+
+  searchBtn.addEventListener('click', () => runSearch(input.value));
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') runSearch(input.value);
+  });
+
+  // If arriving from a quick-occasion button on the dashboard, run the
+  // search immediately using the ?occasion= query param.
+  const params = new URLSearchParams(window.location.search);
+  const prefilled = params.get('occasion');
+  if (prefilled) {
+    input.value = prefilled;
+    runSearch(prefilled);
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Her Personal Stylist</title>
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/outfits.css" />
+</head>
+<body>
+
+<nav class="top-nav">
+  <span class="brand">Her Personal Stylist</span>
+  <button class="logout-link" id="logoutBtn">Log out</button>
+</nav>
+
+<div class="dashboard-wrap">
+  <h1 class="greeting">Hi, Divya.</h1>
+  <p class="greeting-sub">What are you getting ready for?</p>
+
+  <div class="search-row">
+    <input
+      type="text"
+      id="occasionInput"
+      class="occasion-input"
+      placeholder="Type an occasion, or pick one below\u2026"
+    />
+    <button id="searchBtn" class="btn-primary search-btn">Find looks</button>
+  </div>
+
+  <div class="quick-buttons">
+    <button class="quick-btn" data-occasion="Date">Date</button>
+    <button class="quick-btn" data-occasion="Dinner">Dinner</button>
+    <button class="quick-btn" data-occasion="College">College</button>
+    <button class="quick-btn" data-occasion="Work">Work</button>
+    <button class="quick-btn" data-occasion="Party">Party</button>
+    <button class="quick-btn" data-occasion="Casual day">Casual day</button>
+    <button class="quick-btn" data-occasion="Travel">Travel</button>
+    <button class="quick-btn" data-occasion="Beach">Beach</button>
+    <button class="quick-btn" data-occasion="Formal event">Formal event</button>
+    <button class="quick-btn" data-occasion="Wedding guest">Wedding</button>
+    <button class="quick-btn" data-occasion="Coffee date">Coffee</button>
+    <button class="quick-btn" data-occasion="Shopping">Shopping</button>
+    <button class="quick-btn" data-occasion="Photos / photoshoot">Photos</button>
+    <button class="quick-btn" data-occasion="Staying in, cozy">Staying in</button>
+  </div>
+</div>
+
+<script>
+  document.getElementById('searchBtn').addEventListener('click', goSearch);
+  document.getElementById('occasionInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') goSearch();
+  });
+  document.querySelectorAll('.quick-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      window.location.href = '/outfits.html?occasion=' + encodeURIComponent(btn.dataset.occasion);
+    });
+  });
+  function goSearch() {
+    const val = document.getElementById('occasionInput').value.trim();
+    if (!val) return;
+    window.location.href = '/outfits.html?occasion=' + encodeURIComponent(val);
+  }
+</script>
+
+<script src="/js/guard.js"></script>
+<script>
+  document.getElementById('logoutBtn').addEventListener('click', async () => {
+    await fetch('/api/logout', { method: 'POST' });
+    window.location.href = '/index.html';
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,213 @@
+.outfits-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+.search-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.occasion-input {
+  flex: 1;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: 'Inter', sans-serif;
+  background: #fff;
+  color: var(--charcoal);
+  outline: none;
+}
+
+.occasion-input:focus {
+  border-color: var(--rose);
+}
+
+.search-btn {
+  width: auto;
+  padding: 14px 24px;
+  white-space: nowrap;
+}
+
+.status-area {
+  margin-bottom: 20px;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.outfit-card {
+  background: #fff;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+.outfit-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: var(--cream-deep);
+  display: block;
+}
+
+.outfit-image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  color: var(--charcoal-soft);
+}
+
+.photo-credit {
+  display: block;
+  font-size: 11px;
+  color: var(--charcoal-soft);
+  text-align: right;
+  padding: 4px 12px;
+  text-decoration: none;
+  background: var(--cream-deep);
+}
+
+.photo-credit:hover {
+  text-decoration: underline;
+}
+
+.outfit-card-body {
+  padding: 20px;
+}
+
+.outfit-title {
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.outfit-desc {
+  font-size: 14px;
+  color: var(--charcoal-soft);
+  margin: 0 0 14px;
+  line-height: 1.5;
+}
+
+.color-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.color-chip {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: var(--rose-soft);
+  color: var(--charcoal);
+}
+
+.pieces-list {
+  margin: 0 0 14px;
+  padding-left: 18px;
+  font-size: 13px;
+  color: var(--charcoal);
+  line-height: 1.6;
+}
+
+.why-it-works,
+.comfort-notes {
+  font-size: 13px;
+  color: var(--charcoal-soft);
+  line-height: 1.5;
+  margin: 0 0 8px;
+}
+
+.companion-section {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.companion-section h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  margin-bottom: 6px;
+}
+
+.companion-section p {
+  font-size: 13px;
+  color: var(--charcoal-soft);
+  line-height: 1.5;
+  margin: 0 0 8px;
+}
+
+.companion-list {
+  margin: 0 0 8px;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.using-owned,
+.skincare-notes {
+  font-style: italic;
+  font-size: 12px;
+}
+
+/* Skeleton loading state */
+.skeleton-card {
+  padding: 0;
+}
+
+.skeleton-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: linear-gradient(90deg, var(--cream-deep) 25%, #fff 50%, var(--cream-deep) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+.skeleton-line {
+  height: 12px;
+  margin: 14px 20px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--cream-deep) 25%, #fff 50%, var(--cream-deep) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.quick-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.quick-btn {
+  padding: 9px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--charcoal);
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.quick-btn:hover {
+  background: var(--rose-soft);
+  border-color: var(--rose);
+}
