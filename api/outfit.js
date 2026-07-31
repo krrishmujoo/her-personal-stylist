@@ -28,6 +28,9 @@ RULES:
 - Do not default to using the same owned product on every single outfit out of habit. Reference an owned product only when it specifically fits that look's color/finish/occasion — it is completely fine and expected for some outfits to use none of her owned products and instead describe a general shade/technique category (e.g. "a warm terracotta blush" rather than naming a specific owned product) when that fits better.
 - Skincare prep should reflect the occasion's actual demands — e.g. a long evening event calls for different prep than a five-minute errand, and that difference should show in what you recommend, not just the wording.
 - Do not force all three owned makeup products into every outfit — use what's genuinely relevant.
+- Skincare guidance must be practical, never diagnostic. Recommend patch testing for anything new. Never recommend prescription medication. Never guarantee results.
+- Be specific: name actual colors, fabrics, silhouettes, and layering — never vague phrases like "wear something cute."
+- Respond with ONLY valid JSON, no markdown formatting, no code fences, no explanation before or after. The JSON must match this exact shape:
 
 {
   "outfits": [
