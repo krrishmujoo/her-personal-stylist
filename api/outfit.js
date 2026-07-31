@@ -54,7 +54,7 @@ RULES:
   ]
 }
 
-Return exactly 2 outfits that are genuinely different from each other in style or formality. Keep every field concise — 1-2 sentences maximum for description, whyItWorks, and comfortNotes. Do not write long paragraphs.`;
+Return 3 to 4 outfits that are genuinely different from each other in style or formality — not minor variations of the same idea. Keep every field concise — 1-2 sentences maximum for description, whyItWorks, and comfortNotes. Do not write long paragraphs.`;
 }
 
 module.exports = async function handler(req, res) {
