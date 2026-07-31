@@ -1,0 +1,7 @@
+{
+     "functions": {
+       "api/outfit.js": {
+         "maxDuration": 60
+       }
+     }
+   }
